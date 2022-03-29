@@ -10,6 +10,7 @@ pipeline {
             steps {
                 script {
                     sh "ls -ltr"
+                    sh "ls -la"
                     sh "pwd"
                     //wbs = docker.build("${env.IMAGE}")
                     //sh "grep -ir Dockerfile /var/lib"
