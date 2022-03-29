@@ -1,15 +1,19 @@
 pipeline {
-  agent {
-    node {
-      label 'my-defined-label'
-      customWorkspace '/docker-pipeline'
+    agent{
+        label 'linux'
     }
-  }
-  stages {
-    stage('Example Build') {
-      steps {
-        sh 'docker build'
-      }
-    }
-  }
-}
+    stages {
+        stage('Checkout Code') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Build Docker Container') {
+            steps {
+                script {
+                    sh "ls -ltr"
+                    sh "pwd"
+                    //wbs = docker.build("${env.IMAGE}")
+                }
+            }
+        }
