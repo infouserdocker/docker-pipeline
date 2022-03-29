@@ -4,6 +4,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 checkout scm
+                workdir = "$HOME"
             }
         }
         stage('Build Docker Container') {
