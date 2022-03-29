@@ -1,11 +1,8 @@
 pipeline {
-    agent { dockerfile true }
-    stages {
-        stage('Test') {
-            steps {
-                sh 'docker --version'
-                sh 'docker --version'
-            }
-        }
-    }
+agent any
+ stages {
+ stage(‘Cloning Git’) {
+ steps {
+ git 'https://github.com/infouserdocker/docker-pipeline.git'
+ }
 }
