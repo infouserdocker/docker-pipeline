@@ -11,7 +11,9 @@ pipeline {
     }
     stages {
         stage('Build') {
+            
             options { timeout(time: 30, unit: 'MINUTES') }
+            
             steps {
                 script {
                     def commit = checkout scm
@@ -22,12 +24,9 @@ pipeline {
                         "--label \"GIT_COMMIT=${env.GIT_COMMIT}\""
                         + " --build-arg MY_ARG=myArg"
                         + " ."
-                    )
+                    
+                }
                 }
             }
         }
-
-            
-        }
-    }
 }
