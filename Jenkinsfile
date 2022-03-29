@@ -13,7 +13,7 @@ pipeline {
                     sh "pwd"
                     //wbs = docker.build("${env.IMAGE}")
                     //sh "grep -ir Dockerfile /var/lib"
-                    sh "docker build /var/lib/jenkins/workspace/new-pipeline/Jenkinsfile"
+                    sh "docker build Dockerfile"
                 }
             }
         }
