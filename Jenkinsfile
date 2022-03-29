@@ -2,9 +2,7 @@ def dockerImage
 //jenkins needs entrypoint of the image to be empty
 def runArgs = '--entrypoint \'\''
 pipeline {
-    agent {
-        label 'linux_x64'
-    }
+    agent any
     options {
         buildDiscarder(logRotator(numToKeepStr: '100', artifactNumToKeepStr: '20'))
         //timestamps()
