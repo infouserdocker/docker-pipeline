@@ -12,6 +12,7 @@ pipeline {
                     sh "ls -ltr"
                     sh "pwd"
                     //wbs = docker.build("${env.IMAGE}")
+                    sh "docker build"
                 }
             }
         }
