@@ -1,9 +1,18 @@
-agent {
-    // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
-    dockerfile {
-        filename 'Dockerfile.build'
-        dir 'docker-pipeline'
-        label 'my-defined-label'
-        additionalBuildArgs  '--build-arg version=1.0.2'
-          }
+pipeline {
+    agent any
+
+    stages {
+         stage('Build Docker Image') {
+            steps {
+                parallel (
+                    "IDG ECS Django Web Staging" : {
+                       sh 'printenv'
+                       sh 'echo info@201'
+                       sh 'sudo -S docker build docker_web_app'
+                       sh 'echo info@201'
+                    }
+                )
+            }
+        }
+    }
 }
