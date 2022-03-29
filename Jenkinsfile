@@ -1,18 +1,11 @@
-pipeline {
-    agent any
-
-    stages {
-         stage('Build Docker Image') {
-            steps {
-                parallel (
-                    "IDG ECS Django Web Staging" : {
-                       sh 'printenv'
-                       sh 'docker build'
-              
-                    }
-                )
-            }
-        }
-    }
+node {    
+      def app     
+      stage('Clone repository') {               
+             
+            checkout scm    
+      }     
+      stage('Build image') {         
+       
+            app = docker.build("brandonjones085/test")    
+       }     
 }
-
