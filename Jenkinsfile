@@ -1,24 +1,33 @@
+def dockerImage
+//jenkins needs entrypoint of the image to be empty
+def runArgs = '--entrypoint \'\''
 pipeline {
-    agent any
+    agent {
+        label 'linux_x64'
+    }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '100', artifactNumToKeepStr: '20'))
+        timestamps()
+    }
     stages {
-        stage('Checkout Code') {
-            steps {
-                checkout scm
-            }
-        }
-        stage('Build Docker Container') {
+        stage('Build') {
+            options { timeout(time: 30, unit: 'MINUTES') }
             steps {
                 script {
-                    sh "ls -ltr"
-                    sh "ls -la"
-                    sh "pwd"
-                    sh "chmod 777 Dockerfile"
-                    sh "cd docker-pipeline"
-                    //wbs = docker.build("${env.IMAGE}")
-                    //sh "grep -ir Dockerfile /var/lib"
-                    sh "docker build --build-arg  var1=staging -t test-image"
+                    def commit = checkout scm
+                    // we set BRANCH_NAME to make when { branch } syntax work without multibranch job
+                    env.BRANCH_NAME = commit.GIT_BRANCH.replace('main/', '')
+
+                    dockerImage = docker.build("myImage:${env.BUILD_ID}",
+                        "--label \"GIT_COMMIT=${env.GIT_COMMIT}\""
+                        + " --build-arg MY_ARG=myArg"
+                        + " ."
+                    )
                 }
             }
+        }
+
+            
         }
     }
 }
