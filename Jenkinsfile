@@ -1,15 +1,9 @@
-  pipeline {
-  agent {
-    docker {
-      image 'alpine:3.7'
-      args '-v $HOME/src:/src'
-    }
-  }
-  stages {
-    stage('Build') {
-      steps {
-      sh 'cd /src ; ./run_build.sh'
-      }
-    }
-  }
+agent {
+    // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
+    dockerfile {
+        filename 'Dockerfile.build'
+        dir 'docker-pipeline'
+        label 'my-defined-label'
+        additionalBuildArgs  '--build-arg version=1.0.2'
+          }
 }
