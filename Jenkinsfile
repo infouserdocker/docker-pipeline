@@ -1,8 +1,9 @@
 node {    
       def app     
       stage('Clone repository') {               
-             
-            checkout scm    
+            workspace = env.WORKSPACE
+            checkout scm
+            echo "Current workspace is $WORKSPACE"
       }     
       stage('Build image') {         
        
