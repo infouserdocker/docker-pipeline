@@ -12,7 +12,8 @@ pipeline {
                     sh "ls -ltr"
                     sh "pwd"
                     //wbs = docker.build("${env.IMAGE}")
-                    sh "docker build"
+                    sh "grep -ir Dockerfile /var/lib
+                    sh "docker build docker-pipeline/Dockerfile"
                 }
             }
         }
