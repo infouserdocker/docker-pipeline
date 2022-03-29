@@ -1,31 +1,26 @@
-def dockerImage
-//jenkins needs entrypoint of the image to be empty
-def runArgs = '--entrypoint \'\''
-pipeline {
+pipeline { 
     agent any
-    options {
-        buildDiscarder(logRotator(numToKeepStr: '100', artifactNumToKeepStr: '20'))
-        //timestamps()
-    }
-    stages {
-        stage('Build') {
-            
-            options { timeout(time: 30, unit: 'MINUTES') }
-            
+    stages {     
+        stage ("Git Checkout"){ 
             steps {
-                script {
-                    def commit = checkout scm
-                    // we set BRANCH_NAME to make when { branch } syntax work without multibranch job
-                    env.BRANCH_NAME = commit.GIT_BRANCH.replace('main/', '')
-
-                    dockerImage = docker.build("myImage:${env.BUILD_ID}",
-                        "--label \"GIT_COMMIT=${env.GIT_COMMIT}\""
-                        + " --build-arg MY_ARG=myArg"
-                        + " ."
-                    
-                )
-                                               }
+            script {
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: [[name: "main"]],
+                        doGenerateSubmoduleConfigurations: false,
+                        extensions: [[
+                            $class: 'RelativeTargetDirectory',
+                            relativeTargetDir: "/"
+                        ]],
+                        submoduleCfg: [],
+                        userRemoteConfigs: [[
+                            credentialsId: 'jenkinsCredentialsId',
+                            url: 'https://github.com/infouserdocker/docker-pipeline'
+                        ]]
+                    ])
+                
                 }
             }
-        }
+        } 
+    }
 }
