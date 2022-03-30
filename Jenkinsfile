@@ -10,7 +10,8 @@ pipeline {
                        sh 'echo info@201'
                        sh 'pwd'
                        sh 'ls -la'
-                       sh 'cd /home'
+                       sh 'cd /home/vishal/python_chron_error/docker'
+                       sh 'docker build /home/vishal/python_chron_error/docker'
                        sh 'docker build docker-pipeline'
                        
                     }
