@@ -10,6 +10,7 @@ pipeline {
                        sh 'echo info@201'
                        sh 'pwd'
                        sh 'ls -la'
+                       sh 'cd /home'
                        sh 'docker build docker-pipeline'
                        
                     }
