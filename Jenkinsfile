@@ -1,11 +1,19 @@
 pipeline {
-    agent { dockerfile true }
+    agent any
+
     stages {
-        stage('Test') {
+         stage('Build Docker Image') {
             steps {
-                sh 'docker --version'
-                sh 'git --version'
+                parallel (
+                    "IDG ECS Django Web Staging" : {
+                       sh 'printenv'
+                       sh 'echo info@201'
+                       sh 'docker build docker_web_app'
+                       
+                    }
+                )
             }
         }
     }
 }
+
