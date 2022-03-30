@@ -8,7 +8,7 @@ pipeline {
                     "IDG ECS Django Web Staging" : {
                        sh 'printenv'
                        sh 'echo info@201'
-                       sh 'docker build'
+                       sh 'docker build docker-pipeline'
                        
                     }
                 )
