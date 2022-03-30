@@ -11,8 +11,8 @@ pipeline {
                        sh 'pwd'
                        sh 'ls -la'
                        sh 'cd /home/vishal/python_chron_error/docker'
-                       sh 'docker build /home/vishal/python_chron_error/docker'
-                       sh 'docker build docker-pipeline'
+                       sh 'docker build /home/vishal/python_chron_error/docker --build-arg var1=$XDG_DATA_DIRS'
+                       //sh 'docker build docker-pipeline'
                        
                     }
                 )
