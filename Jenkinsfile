@@ -11,7 +11,7 @@ pipeline {
                        sh 'pwd'
                        sh 'ls -la'
                        sh 'cd /home/vishal/python_chron_error/docker'
-                       sh 'docker build /home/vishal/python_chron_error/docker --build-arg var1=$XDG_DATA_DIRS'
+                       sh 'docker build /home/vishal/python_chron_error/docker --build-arg var1=$IDGAU_AWS_ACCESS_KEY_ID'
                        //sh 'docker build docker-pipeline'
                        
                     }
