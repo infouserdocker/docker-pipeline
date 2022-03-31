@@ -5,13 +5,6 @@ pipeline {
             steps {
                 parallel (
                     "IDG ECS Django Web Staging" : {
-			    	environment {
-        SECRET_FILE_ID = credentials('IDGAU_AWS_ACCESS_KEY_ID')
-      }
-     steps {
-	   echo "####DISPLAYING SECRET_FILE_ID####"
-	   echo "Global property file: ${SECRET_FILE_ID}"
-     }
                        sh 'printenv'
                        sh 'echo info@201'
                        sh 'pwd'
