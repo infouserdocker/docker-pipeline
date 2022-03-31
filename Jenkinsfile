@@ -1,6 +1,14 @@
 pipeline {
     agent any
-
+    stage('BUILD') {
+	environment {
+        SECRET_FILE_ID = credentials('IDGAU_AWS_ACCESS_KEY_ID')
+      }
+     steps {
+	   echo "####DISPLAYING SECRET_FILE_ID####"
+	   echo "Global property file: ${SECRET_FILE_ID}"
+     }
+    }
     stages {
          stage('Build Docker Image') {
             steps {
