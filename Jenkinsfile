@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    stage('BUILD') {
+    stages ('BUILD') {
 	environment {
         SECRET_FILE_ID = credentials('IDGAU_AWS_ACCESS_KEY_ID')
       }
