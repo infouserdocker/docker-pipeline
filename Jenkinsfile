@@ -21,10 +21,8 @@ pipeline {
                        sh 'docker build docker-pipeline'
 
             }
-        //}
+        }
         
-    // }
+    }
 }
-    
-
-
+                    }
