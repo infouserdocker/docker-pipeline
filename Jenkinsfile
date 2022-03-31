@@ -12,7 +12,6 @@ pipeline {
                    sh 'cd /home/vishal/python_chron_error/docker'
                    sh 'printenv'
                    sh 'docker build /home/vishal/python_chron_error/docker --build-arg var1=$IDGAU_AWS_ACCESS_KEY_ID'
-                   sh 'docker build docker-pipeline'
 
             }
         }
